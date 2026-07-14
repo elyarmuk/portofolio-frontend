@@ -40,6 +40,10 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Emit a self-contained server bundle (.next/standalone) so the app can run
+  // as a plain Node process on Hostinger Node.js hosting / VPS without shipping
+  // the full node_modules tree. See docs/DEPLOYMENT.md.
+  output: "standalone",
   poweredByHeader: false,
   reactStrictMode: true,
   images: {

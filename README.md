@@ -19,7 +19,7 @@ Built with the Next.js App Router, TypeScript, and Tailwind CSS. Fast, accessibl
 | Forms       | Server Action + Zod validation + rate limiting (Resend optional) |
 | Analytics   | Vercel Analytics (cookieless) |
 | Testing     | Vitest + Testing Library |
-| Deployment  | Vercel (free tier) |
+| Deployment  | Hostinger (Node.js, standalone) — Vercel/Cloudflare also supported |
 
 ## Getting started
 
@@ -76,8 +76,21 @@ See [`docs/CONTENT_GUIDE.md`](docs/CONTENT_GUIDE.md) for a field-by-field walkth
 
 ## Deployment
 
-See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md). In short: import the repo on Vercel,
-set `NEXT_PUBLIC_SITE_URL`, and (optionally) the Resend variables for the contact form.
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for Hostinger (Node.js hosting or VPS),
+Vercel, and Cloudflare Pages instructions.
+
+The app uses Server Components + a contact Server Action, so it runs on a Node.js
+runtime. `next.config.ts` sets `output: "standalone"`, producing a self-contained
+server at `.next/standalone/server.js`:
+
+```bash
+npm ci
+npm run build
+npm run start:standalone   # copies assets + starts the Node server (honors PORT/HOSTNAME)
+```
+
+Set `NEXT_PUBLIC_SITE_URL` to your domain, and optionally the Resend variables to
+enable contact-form email delivery.
 
 ## Accessibility & performance
 

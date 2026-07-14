@@ -32,6 +32,75 @@ The site is a standard Next.js App Router application and deploys cleanly to
 > the repo. The GitHub Actions workflow (`.github/workflows/ci.yml`) runs the
 > quality gate (lint, typecheck, test, build, audit) on every PR.
 
+## Hostinger
+
+This app uses Server Components and a contact **Server Action**, so it needs a
+**Node.js** runtime (not static HTML hosting). Use Hostinger's **Node.js hosting**
+(Business/Cloud plans) or a **VPS**. The build emits a self-contained server via
+`output: "standalone"` in `next.config.ts`, so you don't need to ship the full
+`node_modules` tree to run it.
+
+### Option A — Hostinger Node.js hosting (hPanel)
+
+1. In hPanel, open **Website → Node.js** and create an application:
+   - **Node.js version:** 20 (matches `.nvmrc` / `engines`).
+   - **Application root:** the project folder.
+   - **Application startup file:** `.next/standalone/server.js`.
+2. Set **environment variables** (hPanel → Node.js → Environment):
+
+   | Variable | Value |
+   | -------- | ----- |
+   | `NEXT_PUBLIC_SITE_URL` | Your live URL, no trailing slash (e.g. `https://yourdomain.com`). |
+   | `HOSTNAME` | `0.0.0.0` |
+   | `NODE_ENV` | `production` |
+   | `RESEND_API_KEY` / `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` | Optional — enable contact-form email delivery. |
+
+   > Hostinger injects `PORT` automatically; the standalone server reads `PORT`
+   > and `HOSTNAME`, so no port config is needed in code.
+3. **Build** (run in the SSH terminal or the hPanel build step):
+   ```bash
+   npm ci
+   npm run build
+   npm run postbuild:standalone   # copies public/ and .next/static into the standalone bundle
+   ```
+4. **Start / restart** the Node.js application from hPanel. It launches
+   `.next/standalone/server.js`.
+
+### Option B — Hostinger VPS
+
+1. SSH in and install Node.js 20+ (`nvm install 20`).
+2. Clone the repo, then:
+   ```bash
+   npm ci
+   npm run build
+   ```
+3. Run it with a process manager so it survives restarts:
+   ```bash
+   npm i -g pm2
+   npm run postbuild:standalone
+   PORT=3000 HOSTNAME=0.0.0.0 pm2 start .next/standalone/server.js --name portfolio
+   pm2 save && pm2 startup
+   ```
+   Or run `npm run start:standalone` directly (copies assets, then starts).
+4. Put **Nginx** in front as a reverse proxy to `127.0.0.1:3000` and terminate
+   HTTPS (Let's Encrypt / Hostinger SSL). Example proxy block:
+   ```nginx
+   location / {
+     proxy_pass http://127.0.0.1:3000;
+     proxy_http_version 1.1;
+     proxy_set_header Host $host;
+     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+     proxy_set_header X-Forwarded-Proto $scheme;
+   }
+   ```
+   > The `X-Forwarded-For` header is what the contact-form rate limiter uses to
+   > identify clients — keep it set.
+
+### Redeploying
+
+On each release: `git pull`, `npm ci`, `npm run build`, `npm run postbuild:standalone`,
+then restart the Node app (hPanel) or `pm2 reload portfolio` (VPS).
+
 ## Cloudflare Pages (alternative)
 
 1. Create a Pages project from the GitHub repo.
