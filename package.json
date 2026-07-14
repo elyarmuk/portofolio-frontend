@@ -9,7 +9,12 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "postbuild:standalone": "cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "start:standalone": "npm run postbuild:standalone && node .next/standalone/server.js"
+  },
+  "engines": {
+    "node": ">=20.9.0"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
