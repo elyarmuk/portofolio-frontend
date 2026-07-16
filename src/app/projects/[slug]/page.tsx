@@ -14,6 +14,9 @@ import { ProjectJsonLd } from "@/components/seo/json-ld";
 
 type Params = { slug: string };
 
+/** Only visible projects are statically generated; hidden slugs 404. */
+export const dynamicParams = false;
+
 export function generateStaticParams(): Params[] {
   return projects.map((p) => ({ slug: p.slug }));
 }

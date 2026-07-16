@@ -15,6 +15,7 @@ function make(slug: string, name: string, tags: Project["tags"]): Project {
     status: "Concept",
     technologies: ["Java"],
     featured: false,
+    visible: true,
   };
 }
 

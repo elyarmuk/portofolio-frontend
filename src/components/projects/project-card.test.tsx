@@ -13,6 +13,7 @@ const baseProject: Project = {
   status: "Production",
   technologies: ["Java", "React", "AWS"],
   featured: true,
+  visible: true,
   repo: "private",
   caseStudy: { tagline: "t", sections: [{ heading: "Overview", body: ["x"] }] },
 };

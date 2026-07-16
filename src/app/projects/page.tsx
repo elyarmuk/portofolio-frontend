@@ -9,7 +9,7 @@ import { ProjectsGrid } from "@/components/projects/projects-grid";
 export const metadata: Metadata = createMetadata({
   title: "Projects",
   description:
-    "Software projects by Ahmed Moussa — a shipped transportation platform (Joe Limo) and product concepts spanning full-stack, mobile, cloud, AI, and SaaS.",
+    "Software projects by Ahmed Moussa — including Joe Limo, a transportation-management platform spanning mobile, web, backend, and cloud infrastructure.",
   path: "/projects",
 });
 
@@ -19,7 +19,7 @@ export default function ProjectsPage() {
       <PageHeader
         eyebrow="Projects"
         title="Products & engineering work"
-        description="A mix of shipped software and product initiatives in active discovery. Private repositories are marked accordingly — source is not exposed without approval."
+        description="Selected production-quality work. Private repositories are marked accordingly — source is not exposed without approval."
       />
       <Section>
         <ProjectsGrid projects={projects} />

@@ -6,6 +6,13 @@
  *   currently accurate.
  * - Do not present concept/discovery projects as launched products.
  * - Do not add fake GitHub links. Use `repo: "private"` for private repos.
+ *
+ * Visibility:
+ * - Barkora and Retail Product Intelligence Platform are intentionally hidden
+ *   from the public site until they are ready for public release.
+ * - Set `visible: true` on those entries below to restore them everywhere
+ *   (home, projects list, detail routes, sitemap, filters, JSON-LD).
+ * - Do not delete project data or page components — only flip the flag.
  */
 
 export type ProjectCategory =
@@ -37,6 +44,12 @@ export type Project = {
   status: string;
   technologies: string[];
   featured: boolean;
+  /**
+   * When false, the project is excluded from all public surfaces
+   * (listings, featured work, detail pages, sitemap, SEO). Data is kept
+   * for a future release — restore by setting this to true.
+   */
+  visible: boolean;
   /** "private" hides the link and shows a "Private Repository" note. */
   repo?: "private" | string;
   /** Present only for projects with a full case study page. */
@@ -46,7 +59,8 @@ export type Project = {
   };
 };
 
-export const projects: Project[] = [
+/** Full catalog including projects hidden until public release. */
+const allProjects: Project[] = [
   {
     slug: "joe-limo",
     name: "Joe Limo",
@@ -71,6 +85,7 @@ export const projects: Project[] = [
       "Jenkins",
     ],
     featured: true,
+    visible: true,
     repo: "private",
     caseStudy: {
       tagline:
@@ -192,6 +207,7 @@ export const projects: Project[] = [
     },
   },
   {
+    // Hidden until public release — set visible: true to restore.
     slug: "barkora",
     name: "Barkora",
     category: "Pet Social Platform",
@@ -209,6 +225,7 @@ export const projects: Project[] = [
       "PostgreSQL",
     ],
     featured: true,
+    visible: false,
     caseStudy: {
       tagline: "Product discovery and architecture for a social platform concept.",
       sections: [
@@ -246,6 +263,7 @@ export const projects: Project[] = [
     },
   },
   {
+    // Hidden until public release — set visible: true to restore.
     slug: "retail-product-intelligence",
     name: "Retail Product Intelligence Platform",
     category: "Retail Data and AI SaaS",
@@ -262,6 +280,7 @@ export const projects: Project[] = [
       "AWS",
     ],
     featured: true,
+    visible: false,
     caseStudy: {
       tagline: "Concept and product strategy for a retail data & AI SaaS.",
       sections: [
@@ -296,15 +315,20 @@ export const projects: Project[] = [
   },
 ];
 
+/**
+ * Public projects only. Consumers (home, projects page, sitemap, detail
+ * routes, filters) should use this — not `allProjects`.
+ */
+export const projects = allProjects.filter((p) => p.visible);
+
 export const featuredProjects = projects.filter((p) => p.featured);
 
+/** Resolve a public project by slug. Hidden projects return undefined (404). */
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
 
-/** Distinct filter tags present across all projects, in a stable order. */
-export const projectFilters: (ProjectCategory | "All")[] = [
-  "All",
+const FILTER_ORDER: ProjectCategory[] = [
   "Enterprise",
   "Full Stack",
   "Mobile",
@@ -313,4 +337,10 @@ export const projectFilters: (ProjectCategory | "All")[] = [
   "AI",
   "SaaS",
   "Product Strategy",
+];
+
+/** Distinct filter tags present across visible projects, in a stable order. */
+export const projectFilters: (ProjectCategory | "All")[] = [
+  "All",
+  ...FILTER_ORDER.filter((cat) => projects.some((p) => p.tags.includes(cat))),
 ];

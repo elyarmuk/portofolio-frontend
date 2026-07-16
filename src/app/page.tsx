@@ -230,8 +230,8 @@ export default function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading
               eyebrow="Featured Projects"
-              title="Selected work & product initiatives"
-              description="From a shipped transportation platform to product concepts in active discovery."
+              title="Selected work"
+              description="Production-quality engineering work selected for this portfolio."
             />
             <Button href="/projects" variant="ghost" className="hidden sm:inline-flex">
               All projects
