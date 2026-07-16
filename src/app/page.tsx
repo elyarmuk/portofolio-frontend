@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { ArrowRight, Download, Check } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/brand";
 
@@ -14,10 +16,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
 import { HeroVisual } from "@/components/sections/hero-visual";
+import { HeroPortrait } from "@/components/sections/hero-portrait";
 import { ContentIcon } from "@/components/cards/icon";
 import { ProjectCard } from "@/components/projects/project-card";
 
 const jpmc = experiences.find((e) => e.company === "JPMorgan Chase");
+
+// Show the professional headshot when its file is present (checked at build
+// time); otherwise fall back to the abstract hero visual.
+const headshotAvailable = existsSync(
+  join(process.cwd(), "public", profile.headshot.src.replace(/^\//, "")),
+);
 
 export default function HomePage() {
   return (
@@ -99,7 +108,11 @@ export default function HomePage() {
           </div>
 
           <Reveal delay={0.15} className="order-first lg:order-last">
-            <HeroVisual />
+            {headshotAvailable ? (
+              <HeroPortrait src={profile.headshot.src} alt={profile.headshot.alt} />
+            ) : (
+              <HeroVisual />
+            )}
           </Reveal>
         </Container>
       </section>
