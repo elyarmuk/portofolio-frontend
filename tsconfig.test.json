@@ -1,0 +1,14 @@
+{
+  "//": "Type-checks the test suite (vitest + Testing Library). Kept separate so `next build` never type-checks test files — that lets the production build succeed even when devDependencies are not installed.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
+  },
+  "include": [
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ],
+  "exclude": ["node_modules"]
+}
