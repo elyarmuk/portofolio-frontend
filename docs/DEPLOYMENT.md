@@ -16,7 +16,7 @@ The site is a standard Next.js App Router application and deploys cleanly to
 
    | Variable | Required | Notes |
    | -------- | -------- | ----- |
-   | `NEXT_PUBLIC_SITE_URL` | Yes | Your production URL, no trailing slash (e.g. `https://ahmedmoussa.dev`). |
+   | `NEXT_PUBLIC_SITE_URL` | Yes | Production URL, no trailing slash: `https://ahmedmoussa.tech`. |
    | `RESEND_API_KEY` | Optional | Enables contact-form email delivery. |
    | `CONTACT_TO_EMAIL` | Optional | Where contact submissions are sent. |
    | `CONTACT_FROM_EMAIL` | Optional | Verified Resend sender. |
@@ -50,7 +50,7 @@ This app uses Server Components and a contact **Server Action**, so it needs a
 
    | Variable | Value |
    | -------- | ----- |
-   | `NEXT_PUBLIC_SITE_URL` | Your live URL, no trailing slash (e.g. `https://yourdomain.com`). |
+   | `NEXT_PUBLIC_SITE_URL` | Production URL, no trailing slash: `https://ahmedmoussa.tech`. |
    | `HOSTNAME` | `0.0.0.0` |
    | `NODE_ENV` | `production` |
    | `RESEND_API_KEY` / `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` | Optional — enable contact-form email delivery. |
