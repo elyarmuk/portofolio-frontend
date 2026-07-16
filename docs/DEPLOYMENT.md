@@ -61,31 +61,40 @@ This app uses Server Components and a contact **Server Action**, so it needs a
 `output: "standalone"` in `next.config.ts`, so you don't need to ship the full
 `node_modules` tree to run it.
 
-### Option A — Hostinger Node.js hosting (hPanel)
+### Option A — Hostinger Managed Node.js Web App (hPanel) — recommended
 
-1. In hPanel, open **Website → Node.js** and create an application:
-   - **Node.js version:** 20 (matches `.nvmrc` / `engines`).
-   - **Application root:** the project folder.
-   - **Application startup file:** `.next/standalone/server.js`.
-2. Set **environment variables** (hPanel → Node.js → Environment):
+This is the configured deployment path: **GitHub → Hostinger Managed Node.js
+Web App → ahmedmoussa.tech**.
+
+1. In hPanel, create the **Node.js Web App**:
+   - **Source / repository:** `elyarmuk/portofolio-frontend` (connect GitHub)
+   - **Branch:** `main` (enable auto-deploy on push if offered)
+   - **Node.js version:** `22` (matches `.nvmrc`; `engines` requires ≥ 20.9)
+2. **Build & start commands:**
+
+   | Field | Value |
+   | ----- | ----- |
+   | Install / Build | `npm install && npm run build` |
+   | Start command | `npm start` |
+
+   > `npm start` runs `next start`, which binds to the `PORT` Hostinger injects.
+   > The production build works even if the host installs prod-only
+   > (`NODE_ENV=production`) — build-critical packages are in `dependencies` and
+   > test files are excluded from the build's type-check.
+   >
+   > If your panel requires a single JS **startup file** instead of a run
+   > command, use `.next/standalone/server.js` and set the build to
+   > `npm install && npm run build && npm run postbuild:standalone`.
+3. Set **environment variables** (hPanel → app → Environment):
 
    | Variable | Value |
    | -------- | ----- |
-   | `NEXT_PUBLIC_SITE_URL` | Production URL, no trailing slash: `https://ahmedmoussa.tech`. |
-   | `HOSTNAME` | `0.0.0.0` |
+   | `NEXT_PUBLIC_SITE_URL` | `https://ahmedmoussa.tech` |
    | `NODE_ENV` | `production` |
-   | `RESEND_API_KEY` / `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` | Optional — enable contact-form email delivery. |
+   | `HOSTNAME` | `0.0.0.0` (only needed for the standalone startup-file variant) |
+   | `RESEND_API_KEY` / `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` | Optional — enable contact-form email delivery. Secrets go here only, never in the repo. |
 
-   > Hostinger injects `PORT` automatically; the standalone server reads `PORT`
-   > and `HOSTNAME`, so no port config is needed in code.
-3. **Build** (run in the SSH terminal or the hPanel build step):
-   ```bash
-   npm ci
-   npm run build
-   npm run postbuild:standalone   # copies public/ and .next/static into the standalone bundle
-   ```
-4. **Start / restart** the Node.js application from hPanel. It launches
-   `.next/standalone/server.js`.
+4. **Deploy** from the panel, then attach the domain (below).
 
 ### Option B — Hostinger VPS
 
