@@ -8,17 +8,18 @@
 /* Light theme is the default; `.dark` overrides the raw values below. */
 /* ------------------------------------------------------------------ */
 :root {
-  --background: #f8fafc;
+  /* Light-first system: soft off-white surfaces, white cards, gray typography. */
+  --background: #fafafc;
   --surface: #ffffff;
-  --surface-2: #f1f5f9;
+  --surface-2: #f5f7fb;
   --surface-inverse: #0f172a;
 
-  --foreground: #0f172a;
-  --muted: #475569;
-  --subtle: #64748b;
+  --foreground: #111827;
+  --muted: #374151;
+  --subtle: #6b7280;
 
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
 
   --navy: #0f172a;
   --primary: #2563eb;
@@ -95,8 +96,8 @@
   --text-section: clamp(1.625rem, 1.2rem + 2.1vw, 3rem);
   --text-section--line-height: 1.12;
 
-  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 4px 16px -4px rgb(15 23 42 / 0.08);
-  --shadow-card-hover: 0 4px 10px -2px rgb(15 23 42 / 0.08), 0 16px 40px -12px rgb(15 23 42 / 0.18);
+  --shadow-card: 0 1px 2px 0 rgb(17 24 39 / 0.04), 0 4px 12px -2px rgb(17 24 39 / 0.06);
+  --shadow-card-hover: 0 4px 10px -2px rgb(17 24 39 / 0.07), 0 16px 40px -12px rgb(17 24 39 / 0.14);
 }
 
 /* ------------------------------------------------------------------ */
