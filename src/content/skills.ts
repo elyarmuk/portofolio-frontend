@@ -2,7 +2,7 @@
  * Skills, grouped by domain.
  *
  * No percentage/proficiency bars. Each skill may include a brief, factual
- * note on practical use. `TODO` where a note is not yet verified.
+ * note on practical use.
  */
 
 export type Skill = {

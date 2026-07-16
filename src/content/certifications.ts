@@ -10,21 +10,22 @@
 export type Certification = {
   name: string;
   issuer: string;
-  date: string; // display date; use TODO if unknown
+  date: string; // display date
   credentialUrl?: string;
 };
 
-/** Verified, completed certifications only. Leave empty until confirmed. */
-export const completedCertifications: Certification[] = [
-  // TODO: Add verified completed certifications here, e.g.:
-  // { name: "AWS Certified Solutions Architect – Associate", issuer: "Amazon Web Services", date: "2026" },
-];
+/**
+ * Verified, completed certifications only. Intentionally empty — no unverified
+ * certification is presented as completed. Add entries here once earned.
+ */
+export const completedCertifications: Certification[] = [];
 
 export const currentlyLearning: string[] = [
   "AWS Solutions Architecture",
   "Cloud-native architecture",
   "Distributed systems",
-  "AI and agentic applications",
+  "AI-assisted software engineering",
+  "Application architecture",
 ];
 
 export const futureGoals: string[] = [

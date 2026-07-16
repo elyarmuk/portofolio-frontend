@@ -15,10 +15,7 @@ export const metadata: Metadata = createMetadata({
   path: "/resume",
 });
 
-const lastUpdated =
-  siteConfig.resume.lastUpdated === "TODO"
-    ? "TODO: set date when the approved PDF is added"
-    : siteConfig.resume.lastUpdated;
+const lastUpdated = siteConfig.resume.lastUpdated;
 
 export default function ResumePage() {
   return (
@@ -34,7 +31,9 @@ export default function ResumePage() {
             Email me
           </Button>
         </div>
-        <p className="mt-4 text-sm text-subtle">Last updated: {lastUpdated}</p>
+        {lastUpdated && (
+          <p className="mt-4 text-sm text-subtle">Last updated: {lastUpdated}</p>
+        )}
       </PageHeader>
 
       <Section>
@@ -57,9 +56,7 @@ export default function ResumePage() {
                     Résumé preview isn&apos;t available in this browser.
                   </p>
                   <p className="max-w-sm text-sm text-subtle">
-                    TODO: Add the approved PDF at{" "}
-                    <span className="font-mono">public{siteConfig.resume.path}</span>. Until then,
-                    use the download button above.
+                    Use the download button below to open the PDF.
                   </p>
                   <Button href={siteConfig.resume.path} variant="secondary" size="sm">
                     <Download className="h-4 w-4" />

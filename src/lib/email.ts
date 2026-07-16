@@ -1,13 +1,21 @@
 import type { ContactInput } from "./validation/contact";
 
 /**
- * Sends the contact message.
+ * Sends the contact message via the Resend HTTP API (no SDK dependency).
  *
- * Uses the Resend HTTP API when RESEND_API_KEY is configured (no SDK dependency
- * required). When it is not configured, the submission is logged server-side so
- * the form still works in development — nothing is silently dropped.
+ * Delivery model:
+ * - `from`     → CONTACT_FROM_EMAIL (a verified sender you control).
+ * - `reply_to` → the visitor's email, so replying goes back to them. The
+ *   visitor's address is NEVER used as the sender.
+ * - When Resend env vars are unset, the form still succeeds but nothing is sent
+ *   (useful in development).
  *
- * All secrets are read from environment variables and never exposed to the client.
+ * Logging policy (production-safe):
+ * - Secrets (RESEND_API_KEY) are only ever placed in the Authorization header,
+ *   never logged.
+ * - The visitor's email and the full message body are NEVER logged in
+ *   production. Only non-sensitive metadata (reason, subject, message length)
+ *   is logged. Full content is echoed to the console only in development.
  */
 export async function sendContactMessage(
   data: ContactInput,
@@ -15,6 +23,10 @@ export async function sendContactMessage(
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL;
+  const isProd = process.env.NODE_ENV === "production";
+
+  // Redacted, non-sensitive metadata for logs — no email address, no body.
+  const meta = `reason="${data.reason}" subjectLength=${data.subject.length} messageLength=${data.message.length}`;
 
   const text = [
     `Reason: ${data.reason}`,
@@ -26,11 +38,13 @@ export async function sendContactMessage(
   ].join("\n");
 
   if (!apiKey || !to || !from) {
-    // Development / unconfigured fallback.
-    console.info(
-      "[contact] Email delivery not configured (set RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL). Submission:\n" +
-        text,
+    console.warn(
+      `[contact] Email delivery not configured (set RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL). Submission received (${meta}).`,
     );
+    // Development-only convenience — full content is never logged in production.
+    if (!isProd) {
+      console.info(`[contact] (dev only) submission body:\n${text}`);
+    }
     return { ok: true };
   }
 
@@ -51,13 +65,16 @@ export async function sendContactMessage(
     });
 
     if (!res.ok) {
-      const detail = await res.text().catch(() => "");
-      console.error("[contact] Resend API error", res.status, detail);
+      // Log the status only — not the response body — to avoid leaking any
+      // request echo or sensitive content.
+      console.error(`[contact] Resend API error: status=${res.status} (${meta})`);
       return { ok: false, error: "delivery_failed" };
     }
     return { ok: true };
   } catch (err) {
-    console.error("[contact] Email send threw", err);
+    // Log a short reason only; never the raw error object or submission content.
+    const reason = err instanceof Error ? err.message : "unknown error";
+    console.error(`[contact] Email send failed: ${reason} (${meta})`);
     return { ok: false, error: "delivery_failed" };
   }
 }

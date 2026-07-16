@@ -99,9 +99,7 @@ export default function ExperiencePage() {
 
         <Reveal>
           <p className="mt-10 max-w-2xl text-sm text-subtle">
-            Note: role title, dates, and location are shown as <span className="font-mono">TODO</span>{" "}
-            until verified against the approved résumé. Confidential internal details are
-            intentionally omitted.
+            Confidential internal project details are intentionally omitted.
           </p>
         </Reveal>
       </Section>

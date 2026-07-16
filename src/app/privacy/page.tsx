@@ -71,8 +71,7 @@ export default function PrivacyPage() {
             </section>
           ))}
           <p className="text-sm text-subtle">
-            Note: This is general information, not legal advice. TODO: Review before launch if
-            required for your jurisdiction.
+            This is general information, not legal advice.
           </p>
         </div>
       </Section>

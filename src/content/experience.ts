@@ -2,8 +2,6 @@
  * Professional experience.
  *
  * IMPORTANT — verified content only:
- * - `role`, `startDate`, `endDate`, and `location` are left as `TODO` until
- *   confirmed against the approved résumé. Do not invent them.
  * - Do NOT include proprietary system names, internal URLs, customer data,
  *   confidential architecture, credentials, or restricted business information.
  * - Do NOT include numerical performance results unless verified.
@@ -17,7 +15,7 @@ export type ExperienceContribution = {
 export type Experience = {
   company: string;
   role: string;
-  /** ISO-ish display strings, e.g. "2023" or "Jan 2023". Use TODO if unknown. */
+  /** Display strings, e.g. "November 2023" or "Present". */
   startDate: string;
   endDate: string;
   location: string;
@@ -30,10 +28,10 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     company: "JPMorgan Chase",
-    role: "TODO: exact verified job title from résumé",
-    startDate: "TODO",
-    endDate: "TODO",
-    location: "TODO: verified location or remote status",
+    role: "Java Full Stack Software Engineer",
+    startDate: "November 2023",
+    endDate: "Present",
+    location: "Dallas–Fort Worth, Texas",
     featured: true,
     summary:
       "Contributed to enterprise software systems using Java, Spring Boot, REST APIs, cloud services, CI/CD automation, infrastructure as code, monitoring, testing, and production support practices.",
