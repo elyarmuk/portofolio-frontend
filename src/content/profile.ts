@@ -4,8 +4,6 @@
  * Editing guidance:
  * - Keep language factual. Do NOT add metrics, revenue, customer counts,
  *   titles, or dates that are not verified.
- * - Anything unverified is left as a `TODO` string and should be replaced,
- *   not invented.
  */
 
 export const profile = {

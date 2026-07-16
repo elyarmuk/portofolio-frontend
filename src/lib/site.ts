@@ -3,9 +3,6 @@
  *
  * Update social/contact links here — they are consumed by the navigation,
  * footer, contact page, and structured data.
- *
- * NOTE: Items marked `TODO` should be replaced with verified values before
- * launch. They are intentionally left as placeholders rather than invented.
  */
 
 export const siteConfig = {
@@ -17,9 +14,9 @@ export const siteConfig = {
   description:
     "Portfolio of Ahmed Moussa, a software engineer specializing in Java, Spring Boot, React, AWS, microservices, DevOps, cloud infrastructure, and scalable digital products.",
 
-  // Public production URL. Update after the first Vercel deployment (or set
-  // NEXT_PUBLIC_SITE_URL in the environment to override).
-  url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://ahmedmoussa.dev", // TODO: confirm final domain
+  // Public production URL. Set NEXT_PUBLIC_SITE_URL in the environment to the
+  // final domain at deploy time; the fallback below is only used otherwise.
+  url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://ahmedmoussa.dev",
 
   locale: "en_US",
 
@@ -30,13 +27,14 @@ export const siteConfig = {
 
   social: {
     github: "https://github.com/elyarmuk",
-    linkedin: "https://www.linkedin.com/in/ahmed-moussa", // TODO: confirm exact LinkedIn URL
+    linkedin: "https://www.linkedin.com/in/ahmmoussa/",
   },
 
   resume: {
     // Drop the latest approved PDF at public/documents/ahmed-moussa-resume.pdf
     path: "/documents/ahmed-moussa-resume.pdf",
-    lastUpdated: "TODO", // e.g. "2026-06-01" — set when the approved PDF is added
+    // Optional display date (e.g. "July 2026"). Leave empty to hide the line.
+    lastUpdated: "",
   },
 } as const;
 

@@ -118,9 +118,7 @@ export default async function ProjectDetailPage({
                   <div className="mt-6 flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border-strong bg-surface-2/50 p-10 text-center">
                     <ImageIcon className="h-6 w-6 text-subtle" aria-hidden />
                     <p className="text-sm font-medium text-muted">Architecture diagram</p>
-                    <p className="text-xs text-subtle">
-                      TODO: Add architecture diagram (e.g. /public/images/joe-limo-architecture.svg)
-                    </p>
+                    <p className="text-xs text-subtle">Detailed architecture diagram coming soon.</p>
                   </div>
                 )}
               </Reveal>
@@ -147,12 +145,12 @@ export default async function ProjectDetailPage({
                   <dt className="text-subtle">Status</dt>
                   <dd className="mt-0.5 font-medium text-foreground">{project.status}</dd>
                 </div>
-                <div>
-                  <dt className="text-subtle">Repository</dt>
-                  <dd className="mt-0.5 font-medium text-foreground">
-                    {project.repo === "private" ? "Private Repository" : "TODO"}
-                  </dd>
-                </div>
+                {project.repo === "private" && (
+                  <div>
+                    <dt className="text-subtle">Repository</dt>
+                    <dd className="mt-0.5 font-medium text-foreground">Private Repository</dd>
+                  </div>
+                )}
               </dl>
             </div>
             <Button href="/contact" variant="secondary" className="mt-6 w-full">

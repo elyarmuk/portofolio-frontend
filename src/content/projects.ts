@@ -56,7 +56,7 @@ export const projects: Project[] = [
       "A full transportation-management platform: customer and driver mobile apps, an admin dashboard, backend APIs, and production deployment infrastructure.",
     description:
       "A full transportation-management platform consisting of customer and driver mobile applications, an administrative dashboard, backend APIs, ride management, status tracking, notifications, driver and vehicle information, and production deployment infrastructure.",
-    status: "Production / App Store Deployment", // TODO: keep only if currently accurate
+    status: "Production Launch in Progress",
     technologies: [
       "React Native",
       "Expo",
@@ -153,8 +153,7 @@ export const projects: Project[] = [
         {
           heading: "Production Deployment",
           body: [
-            "The platform is deployed to a production environment with the mobile applications prepared for app store distribution.",
-            "TODO: Confirm current production/app-store status and update if it has changed.",
+            "The platform is deployed to a production environment. The Android application is live, and the remaining customer and iOS applications are in store rollout and review.",
           ],
         },
         {
@@ -208,7 +207,7 @@ export const projects: Project[] = [
       "Java",
       "Spring Boot",
       "PostgreSQL",
-    ], // TODO: confirm the intended stack
+    ],
     featured: true,
     caseStudy: {
       tagline: "Product discovery and architecture for a social platform concept.",
@@ -261,7 +260,7 @@ export const projects: Project[] = [
       "Spring Boot",
       "PostgreSQL",
       "AWS",
-    ], // TODO: confirm the intended stack
+    ],
     featured: true,
     caseStudy: {
       tagline: "Concept and product strategy for a retail data & AI SaaS.",

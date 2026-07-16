@@ -62,7 +62,7 @@ export default function CertificationsPage() {
                   No completed certifications listed yet.
                 </p>
                 <p className="mt-1 text-sm text-subtle">
-                  TODO: Verified certifications will be added here as they are completed.
+                  Verified certifications will appear here as they are earned.
                 </p>
               </div>
             </Reveal>
