@@ -55,6 +55,45 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
+      // Keep HTML short-lived at the Hostinger CDN edge so content updates
+      // (e.g. hidden projects) show up without waiting on a year-long s-maxage.
+      // Fingerprinted /_next/static assets stay immutable via Next defaults.
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+          },
+        ],
+      },
+      {
+        source: "/projects",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+          },
+        ],
+      },
+      {
+        source: "/projects/:slug*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+          },
+        ],
+      },
+      {
+        source: "/sitemap.xml",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+          },
+        ],
+      },
     ];
   },
 };
