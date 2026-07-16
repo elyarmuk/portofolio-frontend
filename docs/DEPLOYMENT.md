@@ -7,6 +7,27 @@ The site is a standard Next.js App Router application and deploys cleanly to
 
 - The repository pushed to GitHub (`elyarmuk/portofolio-frontend`).
 - A production build passing locally: `npm run build`.
+- A **Node.js runtime** on the host. The contact form uses a Server Action, so
+  plain static/shared hosting will not run it — use Hostinger Node.js hosting or
+  a VPS (or Vercel/Cloudflare).
+
+## Secrets handling
+
+**Never put secrets in the repository or in code.** No API keys, tokens, or
+passwords in commits, `.env` files that get committed, or source.
+
+- Set secrets **only** in the hosting platform's environment settings
+  (Hostinger hPanel → Node.js → Environment, or Vercel → Settings → Environment
+  Variables). They are injected at runtime.
+- `.env.example` is a **template only** — it lists variable names with empty
+  values and must never contain real secrets.
+- If a secret is ever pasted into a chat, ticket, screenshot, or commit, treat
+  it as compromised: **rotate/revoke it immediately**, then re-issue a fresh one
+  straight into the platform env.
+- `RESEND_API_KEY` is the only true secret here. `CONTACT_TO_EMAIL`,
+  `CONTACT_FROM_EMAIL`, and `NEXT_PUBLIC_SITE_URL` are configuration, not secrets
+  (and `NEXT_PUBLIC_*` values are exposed to the browser by design — never put a
+  secret behind that prefix).
 
 ## Vercel (recommended)
 
