@@ -16,7 +16,7 @@ export const siteConfig = {
 
   // Public production URL. Set NEXT_PUBLIC_SITE_URL in the environment to the
   // final domain at deploy time; the fallback below is only used otherwise.
-  url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://ahmedmoussa.dev",
+  url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://ahmedmoussa.tech",
 
   locale: "en_US",
 
