@@ -22,7 +22,7 @@ export function Section({
     <section
       className={cn(
         "py-16 sm:py-20 lg:py-24",
-        surface && "bg-surface-2/60 dark:bg-surface/40",
+        surface && "bg-surface-2 dark:bg-surface/50",
         className,
       )}
       {...props}

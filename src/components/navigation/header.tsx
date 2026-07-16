@@ -80,10 +80,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b transition-colors duration-300",
-        scrolled
-          ? "border-border bg-background/85 backdrop-blur-md"
-          : "border-transparent bg-background/60 backdrop-blur-sm",
+        "sticky top-0 z-50 w-full border-b border-border bg-surface/80 backdrop-blur-md transition-shadow duration-300",
+        scrolled ? "shadow-sm" : "shadow-none",
       )}
     >
       <nav aria-label="Primary" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-6 lg:px-8">

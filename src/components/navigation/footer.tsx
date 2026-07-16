@@ -14,17 +14,17 @@ const secondaryLinks = [
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-border bg-surface">
+    <footer className="mt-auto bg-navy text-slate-300">
       <Container className="py-12">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-sm">
-            <Logo />
-            <p className="mt-4 text-sm leading-relaxed text-muted">
+            <Logo onDark />
+            <p className="mt-4 text-sm leading-relaxed text-slate-400">
               {siteConfig.title}
             </p>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-300 hover:text-blue-200"
             >
               <Mail className="h-4 w-4" />
               {siteConfig.contact.email}
@@ -32,7 +32,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer" className="flex flex-col gap-3">
-            <p className="font-mono text-xs font-semibold uppercase tracking-widest text-subtle">
+            <p className="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500">
               Explore
             </p>
             <ul className="grid grid-cols-2 gap-x-10 gap-y-2">
@@ -40,7 +40,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-muted transition-colors hover:text-foreground"
+                    className="text-sm text-slate-400 transition-colors hover:text-white"
                   >
                     {item.label}
                   </Link>
@@ -50,14 +50,14 @@ export function Footer() {
           </nav>
 
           <div className="flex flex-col gap-3">
-            <p className="font-mono text-xs font-semibold uppercase tracking-widest text-subtle">
+            <p className="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500">
               Connect
             </p>
-            <SocialLinks />
+            <SocialLinks onDark />
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-border pt-6 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
           <p className="font-mono text-xs">Built with Next.js, TypeScript &amp; Tailwind CSS.</p>
         </div>
