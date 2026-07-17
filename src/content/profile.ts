@@ -12,13 +12,13 @@ export const profile = {
 
   /**
    * Optional professional headshot for the hero.
-   * Drop the image at `public/images/ahmed-moussa.jpg` (portrait, ~800×1000,
+   * Drop the image at `public/images/ahmed-moussa.jpg` (portrait, ~1000×1250,
    * 4:5). When the file exists it replaces the abstract hero visual at build
    * time; otherwise the abstract visual is shown. No broken image either way.
    */
   headshot: {
     src: "/images/ahmed-moussa.jpg",
-    alt: "Portrait of Ahmed Moussa",
+    alt: "Ahmed Moussa, software engineer and Java full-stack developer",
   },
 
   heroHeadline:

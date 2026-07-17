@@ -18,6 +18,7 @@ export function PersonJsonLd() {
     name: siteConfig.name,
     url: siteConfig.url,
     email: `mailto:${siteConfig.contact.email}`,
+    image: `${siteConfig.url}/images/ahmed-moussa.jpg`,
     jobTitle: "Software Engineer",
     description: siteConfig.description,
     sameAs: [siteConfig.social.linkedin, siteConfig.social.github],

@@ -10,23 +10,30 @@ import Image from "next/image";
  */
 export function HeroPortrait({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative mx-auto w-full max-w-md">
-      {/* Backdrop glow + grid, matching the abstract visual's treatment */}
-      <div aria-hidden className="absolute inset-0 -z-10 rounded-3xl bg-grid opacity-50" />
+    <div className="relative mx-auto w-full max-w-[22rem] sm:max-w-sm lg:max-w-[25rem]">
+      {/* Subtle technical treatment keeps the engineering identity behind the portrait. */}
+      <div aria-hidden className="absolute inset-0 -z-10 rounded-3xl bg-grid opacity-45" />
       <div
         aria-hidden
-        className="absolute -inset-4 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_30%_20%,color-mix(in_srgb,var(--primary)_24%,transparent),transparent_55%),radial-gradient(circle_at_75%_85%,color-mix(in_srgb,var(--accent)_22%,transparent),transparent_55%)] blur-2xl"
+        className="absolute -inset-5 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_30%_20%,color-mix(in_srgb,var(--primary)_20%,transparent),transparent_58%),radial-gradient(circle_at_75%_85%,color-mix(in_srgb,var(--accent)_14%,transparent),transparent_60%)] blur-2xl"
       />
 
-      <div className="relative overflow-hidden rounded-3xl border border-border bg-surface p-2 shadow-[var(--shadow-card-hover)]">
+      <div className="pointer-events-none absolute -left-4 top-8 hidden rounded-lg border border-border bg-surface/80 px-3 py-2 font-mono text-[10px] text-subtle shadow-[var(--shadow-card)] backdrop-blur sm:block">
+        api.status: <span className="text-success">online</span>
+      </div>
+      <div className="pointer-events-none absolute -right-3 bottom-16 hidden rounded-lg border border-border bg-surface/80 px-3 py-2 font-mono text-[10px] text-subtle shadow-[var(--shadow-card)] backdrop-blur sm:block">
+        cloud.deploy()
+      </div>
+
+      <div className="relative overflow-hidden rounded-3xl border border-border bg-surface p-2 shadow-[var(--shadow-card-hover)] dark:border-primary/25">
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
           <Image
             src={src}
             alt={alt}
             fill
             priority
-            sizes="(max-width: 1024px) 80vw, 40vw"
-            className="object-cover"
+            sizes="(max-width: 640px) 78vw, (max-width: 1024px) 360px, 400px"
+            className="object-cover object-[58%_42%]"
           />
         </div>
       </div>

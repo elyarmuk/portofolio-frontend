@@ -107,7 +107,7 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.15} className="order-first lg:order-last">
+          <Reveal delay={0.15}>
             {headshotAvailable ? (
               <HeroPortrait src={profile.headshot.src} alt={profile.headshot.alt} />
             ) : (
