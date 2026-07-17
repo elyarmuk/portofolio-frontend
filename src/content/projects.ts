@@ -33,6 +33,12 @@ export type ProjectMedia = {
   height: number;
 };
 
+export type ProjectGalleryGroup = {
+  title: string;
+  description?: string;
+  items: ProjectMedia[];
+};
+
 export type CaseStudySection = {
   heading: string;
   body?: string[];
@@ -42,8 +48,6 @@ export type CaseStudySection = {
   diagramPlaceholder?: boolean;
   /** Architecture or system diagram shown under the section body. */
   diagram?: ProjectMedia;
-  /** App / product screenshots for this section. */
-  gallery?: ProjectMedia[];
 };
 
 export type Project = {
@@ -68,6 +72,14 @@ export type Project = {
   caseStudy?: {
     tagline: string;
     sections: CaseStudySection[];
+    /**
+     * Product screens hosted on `/projects/<slug>/gallery`.
+     * Keep the case study page focused on narrative + architecture.
+     */
+    gallery?: {
+      description: string;
+      groups: ProjectGalleryGroup[];
+    };
   };
 };
 
@@ -140,70 +152,6 @@ const allProjects: Project[] = [
           heading: "Driver Application",
           body: [
             "A dedicated React Native (Expo) app for drivers to manage assigned rides, update status, and view relevant trip and vehicle information.",
-          ],
-        },
-        {
-          heading: "Product Screens",
-          body: [
-            "Selected views from the customer and chauffeur applications — booking flows, AI-assisted itinerary upload, ride history, and driver operations.",
-          ],
-          gallery: [
-            {
-              src: "/images/joe-limo/customer-home.png",
-              alt: "Joe Limo customer app home screen with quick actions for new reservation, upload itinerary, and ride history",
-              caption: "Customer — Home",
-              width: 1080,
-              height: 1920,
-            },
-            {
-              src: "/images/joe-limo/customer-request-ride.png",
-              alt: "Joe Limo request a ride screen with smart assist, request type, and ride type options",
-              caption: "Customer — Request a Ride",
-              width: 1080,
-              height: 1920,
-            },
-            {
-              src: "/images/joe-limo/customer-upload-itinerary.png",
-              alt: "Joe Limo upload itinerary screen with AI extraction from flight, hotel, email, PDF, photo, or note",
-              caption: "Customer — Upload Itinerary",
-              width: 1080,
-              height: 1920,
-            },
-            {
-              src: "/images/joe-limo/customer-ride-history.png",
-              alt: "Joe Limo ride history screen with upcoming, completed, and cancelled tabs",
-              caption: "Customer — Ride History",
-              width: 1080,
-              height: 1920,
-            },
-            {
-              src: "/images/joe-limo/customer-profile.png",
-              alt: "Joe Limo customer profile screen for managing account details",
-              caption: "Customer — Profile",
-              width: 1080,
-              height: 1920,
-            },
-            {
-              src: "/images/joe-limo/driver-dashboard.png",
-              alt: "Joe Limo chauffeur app dashboard with availability status and today's assignments",
-              caption: "Chauffeur — Dashboard",
-              width: 2064,
-              height: 2752,
-            },
-            {
-              src: "/images/joe-limo/driver-upcoming-rides.png",
-              alt: "Joe Limo chauffeur upcoming rides screen",
-              caption: "Chauffeur — Upcoming Rides",
-              width: 2064,
-              height: 2752,
-            },
-            {
-              src: "/images/joe-limo/driver-account.png",
-              alt: "Joe Limo chauffeur account screen with profile, contact details, and driver menu",
-              caption: "Chauffeur — Account",
-              width: 2752,
-              height: 2064,
-            },
           ],
         },
         {
@@ -287,6 +235,124 @@ const allProjects: Project[] = [
           ],
         },
       ],
+      gallery: {
+        description:
+          "Selected screens from the customer app, chauffeur app, and admin operations console.",
+        groups: [
+          {
+            title: "Customer App",
+            description:
+              "Booking flows, AI-assisted itinerary upload, ride history, and profile management.",
+            items: [
+              {
+                src: "/images/joe-limo/customer-home.png",
+                alt: "Joe Limo customer app home screen with quick actions for new reservation, upload itinerary, and ride history",
+                caption: "Home",
+                width: 1080,
+                height: 1920,
+              },
+              {
+                src: "/images/joe-limo/customer-request-ride.png",
+                alt: "Joe Limo request a ride screen with smart assist, request type, and ride type options",
+                caption: "Request a Ride",
+                width: 1080,
+                height: 1920,
+              },
+              {
+                src: "/images/joe-limo/customer-upload-itinerary.png",
+                alt: "Joe Limo upload itinerary screen with AI extraction from flight, hotel, email, PDF, photo, or note",
+                caption: "Upload Itinerary",
+                width: 1080,
+                height: 1920,
+              },
+              {
+                src: "/images/joe-limo/customer-ride-history.png",
+                alt: "Joe Limo ride history screen with upcoming, completed, and cancelled tabs",
+                caption: "Ride History",
+                width: 1080,
+                height: 1920,
+              },
+              {
+                src: "/images/joe-limo/customer-profile.png",
+                alt: "Joe Limo customer profile screen for managing account details",
+                caption: "Profile",
+                width: 1080,
+                height: 1920,
+              },
+            ],
+          },
+          {
+            title: "Chauffeur App",
+            description:
+              "Driver availability, assignments, upcoming rides, and account tools.",
+            items: [
+              {
+                src: "/images/joe-limo/driver-dashboard.png",
+                alt: "Joe Limo chauffeur app dashboard with availability status and today's assignments",
+                caption: "Dashboard",
+                width: 2064,
+                height: 2752,
+              },
+              {
+                src: "/images/joe-limo/driver-upcoming-rides.png",
+                alt: "Joe Limo chauffeur upcoming rides screen",
+                caption: "Upcoming Rides",
+                width: 2064,
+                height: 2752,
+              },
+              {
+                src: "/images/joe-limo/driver-account.png",
+                alt: "Joe Limo chauffeur account screen with profile, contact details, and driver menu",
+                caption: "Account",
+                width: 2752,
+                height: 2064,
+              },
+            ],
+          },
+          {
+            title: "Admin Console",
+            description:
+              "Operations overview, roster management, dispatch communications, reporting, and settings.",
+            items: [
+              {
+                src: "/images/joe-limo/admin-overview.png",
+                alt: "Joe Limo admin dispatch dashboard showing operations overview metrics and recent rides",
+                caption: "Dispatch Dashboard — Overview",
+                width: 2504,
+                height: 1237,
+              },
+              {
+                src: "/images/joe-limo/admin-drivers.png",
+                alt: "Joe Limo admin driver management screen with roster cards and add-driver actions",
+                caption: "Driver Management",
+                width: 2503,
+                height: 1190,
+              },
+              {
+                src: "/images/joe-limo/admin-dispatch.png",
+                alt: "Joe Limo admin communications center for driver dispatch reports and ride messages",
+                caption: "Dispatch — Communications",
+                width: 2498,
+                height: 1202,
+              },
+              {
+                src: "/images/joe-limo/admin-reports.png",
+                alt: "Joe Limo admin financial reports screen with monthly ride volume, revenue, and profit metrics",
+                caption: "Reports",
+                width: 2494,
+                height: 1225,
+              },
+              {
+                src: "/images/joe-limo/admin-settings.png",
+                alt: "Joe Limo admin settings screen with account, system, authentication, and appearance options",
+                caption: "Settings",
+                width: 2494,
+                height: 1148,
+              },
+            ],
+          },
+        ],
+      },
     },
   },
   {
@@ -409,6 +475,11 @@ export const featuredProjects = projects.filter((p) => p.featured);
 /** Resolve a public project by slug. Hidden projects return undefined (404). */
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
+}
+
+/** Visible projects that have a dedicated product gallery page. */
+export function getProjectsWithGallery(): Project[] {
+  return projects.filter((p) => Boolean(p.caseStudy?.gallery?.groups.length));
 }
 
 const FILTER_ORDER: ProjectCategory[] = [

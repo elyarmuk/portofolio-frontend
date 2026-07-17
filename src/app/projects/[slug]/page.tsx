@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Lock, ImageIcon } from "lucide-react";
+import { ArrowLeft, Lock, ImageIcon, Images } from "lucide-react";
 
 import { projects, getProjectBySlug } from "@/content/projects";
 import { siteConfig } from "@/lib/site";
@@ -11,7 +11,7 @@ import { Badge, StatusBadge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { ProjectJsonLd } from "@/components/seo/json-ld";
-import { ProjectDiagram, ProjectGallery } from "@/components/projects/project-media";
+import { ProjectDiagram } from "@/components/projects/project-media";
 
 type Params = { slug: string };
 
@@ -87,6 +87,14 @@ export default async function ProjectDetailPage({
             {cs?.tagline && (
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">{cs.tagline}</p>
             )}
+            {cs?.gallery && (
+              <div className="mt-8">
+                <Button href={`/projects/${project.slug}/gallery`} variant="secondary">
+                  <Images className="h-4 w-4" />
+                  Product Gallery
+                </Button>
+              </div>
+            )}
           </Reveal>
         </Container>
       </div>
@@ -126,9 +134,6 @@ export default async function ProjectDetailPage({
                     <p className="text-xs text-subtle">Detailed architecture diagram coming soon.</p>
                   </div>
                 )}
-                {section.gallery && section.gallery.length > 0 && (
-                  <ProjectGallery items={section.gallery} />
-                )}
               </Reveal>
             ))
           ) : (
@@ -161,7 +166,17 @@ export default async function ProjectDetailPage({
                 )}
               </dl>
             </div>
-            <Button href="/contact" variant="secondary" className="mt-6 w-full">
+            {cs?.gallery && (
+              <Button href={`/projects/${project.slug}/gallery`} variant="secondary" className="mt-6 w-full">
+                <Images className="h-4 w-4" />
+                Product Gallery
+              </Button>
+            )}
+            <Button
+              href="/contact"
+              variant="secondary"
+              className={cs?.gallery ? "mt-3 w-full" : "mt-6 w-full"}
+            >
               Discuss this project
             </Button>
           </div>
