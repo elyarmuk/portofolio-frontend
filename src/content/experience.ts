@@ -114,14 +114,88 @@ export const experiences: Experience[] = [
       },
     ],
   },
+  {
+    company: "Infosys Ltd. (Client: Travelers Insurance)",
+    role: "Full-Stack Software Developer",
+    startDate: "February 2022",
+    endDate: "October 2023",
+    location: "United States",
+    featured: false,
+    companyDescription:
+      "Client engagement with Travelers Insurance — enterprise application delivery across backend services, web interfaces, and release-ready feature work.",
+    summary:
+      "Delivered full-stack features for insurance-domain applications, strengthening API contracts, UI workflows, and quality practices while collaborating closely with client and delivery teams.",
+    technologies: [
+      "Java",
+      "Spring Boot",
+      "REST APIs",
+      "JavaScript",
+      "React",
+      "SQL",
+      "JUnit",
+      "Agile",
+    ],
+    contributions: [],
+    achievements: [
+      "Built and enhanced Java/Spring Boot services supporting core business workflows",
+      "Designed and maintained REST APIs consumed by internal web applications",
+      "Implemented responsive UI features with modern JavaScript and React patterns",
+      "Improved data access and persistence flows using SQL-backed services",
+      "Added automated unit and integration checks to reduce regression risk",
+      "Partnered with client stakeholders to clarify requirements and ship incremental releases",
+      "Supported deployment readiness through code reviews, defect resolution, and sprint delivery",
+    ],
+  },
+  {
+    company: "Cigna",
+    role: "Java Full-Stack Developer",
+    startDate: "August 2020",
+    endDate: "January 2022",
+    location: "United States",
+    featured: false,
+    companyDescription:
+      "Healthcare enterprise — full-stack development on Java-based applications with emphasis on reliable APIs, maintainable UI layers, and collaborative delivery.",
+    summary:
+      "Developed and maintained Java full-stack application features, focusing on service reliability, clean API boundaries, and practical frontend updates in an Agile environment.",
+    technologies: [
+      "Java",
+      "Spring Boot",
+      "REST APIs",
+      "JavaScript",
+      "HTML & CSS",
+      "SQL",
+      "JUnit",
+      "Agile",
+    ],
+    contributions: [],
+    achievements: [
+      "Implemented Java and Spring Boot backend features for production applications",
+      "Extended REST API endpoints to support evolving product requirements",
+      "Updated frontend screens and user flows with accessible, maintainable markup and JavaScript",
+      "Worked with relational data models and SQL queries for application persistence",
+      "Wrote unit tests to validate business logic and protect critical paths",
+      "Collaborated with cross-functional teammates to triage issues and deliver sprint commitments",
+      "Grew foundation in enterprise engineering practices that scaled into later cloud and DevOps work",
+    ],
+  },
 ];
 
 /** Featured employer shown in the expanded experience hero block. */
 export const featuredExperience =
   experiences.find((e) => e.featured) ?? experiences[0];
 
-/** Non-featured roles for the compact career timeline. */
-export const previousExperiences = experiences.filter((e) => !e.featured);
+/**
+ * Non-featured roles for the career timeline, newest first
+ * (Infosys → Cigna), telling the growth story into JPMorgan.
+ */
+export const previousExperiences = experiences
+  .filter((e) => !e.featured)
+  .sort((a, b) => {
+    // Chronological newest-first by known start dates in this list.
+    const order = ["February 2022", "August 2020"];
+    return order.indexOf(a.startDate) - order.indexOf(b.startDate);
+  });
+
 
 /**
  * Cross-employer engineering strengths for the Experience page.

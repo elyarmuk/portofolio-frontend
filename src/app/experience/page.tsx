@@ -22,7 +22,7 @@ import { ExperienceProjectCard } from "@/components/experience/project-preview";
 export const metadata: Metadata = createMetadata({
   title: "Experience",
   description:
-    "Professional software engineering journey of Ahmed Moussa — enterprise engineering at JPMorgan Chase, cloud & DevOps strengths, and flagship product work.",
+    "Professional software engineering journey of Ahmed Moussa — from Cigna and Infosys to enterprise engineering at JPMorgan Chase.",
   path: "/experience",
 });
 
@@ -32,7 +32,7 @@ export default function ExperiencePage() {
       <PageHeader
         eyebrow="Experience"
         title="Engineering journey & enterprise impact"
-        description="A career story focused on building, shipping, and operating production systems — not a plain résumé dump. Start with enterprise engineering at JPMorgan Chase, then explore technical strengths and product work."
+        description="A career arc from foundational full-stack delivery at Cigna, through client-facing enterprise work at Infosys, to cloud-native production engineering at JPMorgan Chase."
       />
 
       {/* Featured employer */}
@@ -41,7 +41,7 @@ export default function ExperiencePage() {
           <SectionHeading
             eyebrow="Featured Experience"
             title="JPMorgan Chase"
-            description="The primary, most detailed professional chapter — enterprise Java, cloud, CI/CD, and production engineering."
+            description="The most recent chapter — enterprise Java, cloud infrastructure, CI/CD, and production engineering at scale."
           />
         </Reveal>
         <div className="mt-8">
@@ -60,8 +60,8 @@ export default function ExperiencePage() {
         <Reveal>
           <SectionHeading
             eyebrow="Career Timeline"
-            title="Previous professional experience"
-            description="Additional software engineering roles appear here when verified from the approved résumé. Only confirmed employers, titles, and dates are published."
+            title="Building toward enterprise depth"
+            description="Earlier roles that established full-stack craft, client collaboration, and the foundation for cloud and DevOps ownership at JPMorgan Chase."
           />
         </Reveal>
         <div className="mt-8">

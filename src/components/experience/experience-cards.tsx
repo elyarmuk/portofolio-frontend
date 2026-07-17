@@ -96,6 +96,11 @@ export function TimelineItem({
   experience: Experience;
   index: number;
 }) {
+  const contributions =
+    experience.achievements && experience.achievements.length > 0
+      ? experience.achievements
+      : experience.contributions.flatMap((c) => c.points);
+
   return (
     <Reveal delay={0.05 * index} as="li" className="relative">
       <span
@@ -112,7 +117,12 @@ export function TimelineItem({
               {experience.company}
             </h3>
             <p className="mt-1 font-medium text-primary">{experience.role}</p>
-            <p className="mt-1 text-sm text-subtle">{experience.location}</p>
+            {experience.location && (
+              <p className="mt-1 flex items-center gap-1.5 text-sm text-subtle">
+                <MapPin className="h-3.5 w-3.5" aria-hidden />
+                {experience.location}
+              </p>
+            )}
           </div>
           <Badge variant="info" className="w-fit">
             {experience.startDate} — {experience.endDate}
@@ -126,24 +136,34 @@ export function TimelineItem({
         )}
         <p className="mt-3 leading-relaxed text-muted">{experience.summary}</p>
 
-        {experience.achievements && experience.achievements.length > 0 && (
-          <ul className="mt-4 space-y-1.5">
-            {experience.achievements.map((item) => (
-              <li key={item} className="flex gap-2 text-sm leading-relaxed text-muted">
-                <span className="mt-2 h-1 w-1 flex-none rounded-full bg-primary" aria-hidden />
-                {item}
+        {contributions.length > 0 && (
+          <div className="mt-5">
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-subtle">
+              Key Contributions
+            </h4>
+            <ul className="mt-3 space-y-2">
+              {contributions.map((item) => (
+                <li key={item} className="flex gap-2 text-sm leading-relaxed text-muted">
+                  <span className="mt-2 h-1 w-1 flex-none rounded-full bg-primary" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="mt-5">
+          <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-subtle">
+            Technologies
+          </h4>
+          <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Technologies">
+            {experience.technologies.map((tech) => (
+              <li key={tech}>
+                <Badge variant="tech">{tech}</Badge>
               </li>
             ))}
           </ul>
-        )}
-
-        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Technologies">
-          {experience.technologies.map((tech) => (
-            <li key={tech}>
-              <Badge variant="tech">{tech}</Badge>
-            </li>
-          ))}
-        </ul>
+        </div>
       </Card>
     </Reveal>
   );
@@ -151,19 +171,7 @@ export function TimelineItem({
 
 /** Vertical career timeline for non-featured roles. */
 export function ExperienceTimeline({ items }: { items: Experience[] }) {
-  if (items.length === 0) {
-    return (
-      <Reveal>
-        <Card className="border-dashed">
-          <p className="leading-relaxed text-muted">
-            Additional prior software engineering roles will appear here once verified
-            against the approved résumé. Only confirmed employers, titles, and dates are
-            published.
-          </p>
-        </Card>
-      </Reveal>
-    );
-  }
+  if (items.length === 0) return null;
 
   return (
     <ol className="relative space-y-8 border-l border-border pl-8 sm:pl-10">
