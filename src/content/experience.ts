@@ -97,10 +97,10 @@ export const experiences: Experience[] = [
         ],
       },
       {
-        category: "Observability & Production Support",
+        category: "Monitoring & Production Support",
         icon: "observe",
         points: [
-          "Splunk and Dynatrace observability",
+          "Splunk and Dynatrace monitoring",
           "Kafka producer reliability",
           "Production support and incident collaboration",
         ],

@@ -3,10 +3,10 @@ import {
   Cloud,
   Layers,
   Lightbulb,
-  GitBranch,
-  FlaskConical,
-  Activity,
-  Users,
+  Workflow,
+  ClipboardCheck,
+  Monitor,
+  KanbanSquare,
   Boxes,
   type LucideIcon,
 } from "lucide-react";
@@ -16,10 +16,14 @@ const iconMap: Record<string, LucideIcon> = {
   cloud: Cloud,
   layers: Layers,
   lightbulb: Lightbulb,
-  pipeline: GitBranch,
-  test: FlaskConical,
-  observe: Activity,
-  users: Users,
+  /** CI/CD pipelines and release automation */
+  pipeline: Workflow,
+  /** Automated testing and code quality */
+  test: ClipboardCheck,
+  /** Monitoring dashboards and production support */
+  observe: Monitor,
+  /** Agile delivery and team collaboration */
+  users: KanbanSquare,
   architecture: Boxes,
 };
 
