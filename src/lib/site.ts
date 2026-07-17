@@ -34,7 +34,7 @@ export const siteConfig = {
     // Drop the latest approved PDF at public/documents/ahmed-moussa-resume.pdf
     path: "/documents/ahmed-moussa-resume.pdf",
     // Optional display date (e.g. "July 2026"). Leave empty to hide the line.
-    lastUpdated: "",
+    lastUpdated: "July 2026",
   },
 } as const;
 
