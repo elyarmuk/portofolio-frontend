@@ -25,6 +25,14 @@ export type ProjectCategory =
   | "SaaS"
   | "Product Strategy";
 
+export type ProjectMedia = {
+  src: string;
+  alt: string;
+  caption?: string;
+  width: number;
+  height: number;
+};
+
 export type CaseStudySection = {
   heading: string;
   body?: string[];
@@ -32,6 +40,10 @@ export type CaseStudySection = {
   bullets?: string[];
   /** When true, renders an "architecture diagram" placeholder box. */
   diagramPlaceholder?: boolean;
+  /** Architecture or system diagram shown under the section body. */
+  diagram?: ProjectMedia;
+  /** App / product screenshots for this section. */
+  gallery?: ProjectMedia[];
 };
 
 export type Project = {
@@ -131,6 +143,70 @@ const allProjects: Project[] = [
           ],
         },
         {
+          heading: "Product Screens",
+          body: [
+            "Selected views from the customer and chauffeur applications — booking flows, AI-assisted itinerary upload, ride history, and driver operations.",
+          ],
+          gallery: [
+            {
+              src: "/images/joe-limo/customer-home.png",
+              alt: "Joe Limo customer app home screen with quick actions for new reservation, upload itinerary, and ride history",
+              caption: "Customer — Home",
+              width: 1080,
+              height: 1920,
+            },
+            {
+              src: "/images/joe-limo/customer-request-ride.png",
+              alt: "Joe Limo request a ride screen with smart assist, request type, and ride type options",
+              caption: "Customer — Request a Ride",
+              width: 1080,
+              height: 1920,
+            },
+            {
+              src: "/images/joe-limo/customer-upload-itinerary.png",
+              alt: "Joe Limo upload itinerary screen with AI extraction from flight, hotel, email, PDF, photo, or note",
+              caption: "Customer — Upload Itinerary",
+              width: 1080,
+              height: 1920,
+            },
+            {
+              src: "/images/joe-limo/customer-ride-history.png",
+              alt: "Joe Limo ride history screen with upcoming, completed, and cancelled tabs",
+              caption: "Customer — Ride History",
+              width: 1080,
+              height: 1920,
+            },
+            {
+              src: "/images/joe-limo/customer-profile.png",
+              alt: "Joe Limo customer profile screen for managing account details",
+              caption: "Customer — Profile",
+              width: 1080,
+              height: 1920,
+            },
+            {
+              src: "/images/joe-limo/driver-dashboard.png",
+              alt: "Joe Limo chauffeur app dashboard with availability status and today's assignments",
+              caption: "Chauffeur — Dashboard",
+              width: 2064,
+              height: 2752,
+            },
+            {
+              src: "/images/joe-limo/driver-upcoming-rides.png",
+              alt: "Joe Limo chauffeur upcoming rides screen",
+              caption: "Chauffeur — Upcoming Rides",
+              width: 2064,
+              height: 2752,
+            },
+            {
+              src: "/images/joe-limo/driver-account.png",
+              alt: "Joe Limo chauffeur account screen with profile, contact details, and driver menu",
+              caption: "Chauffeur — Account",
+              width: 2752,
+              height: 2064,
+            },
+          ],
+        },
+        {
           heading: "Admin Portal",
           body: [
             "A React + TypeScript web dashboard for operations: managing driver and vehicle information, reviewing ride activity, and overseeing platform state.",
@@ -140,8 +216,15 @@ const allProjects: Project[] = [
           heading: "Backend Architecture",
           body: [
             "Java and Spring Boot services expose REST APIs consumed by the mobile apps and admin portal. PostgreSQL provides persistent storage for users, rides, drivers, vehicles, and status history.",
+            "Clients reach the platform through an HTTPS edge (nginx + TLS). Keycloak provides OIDC authentication for customer, driver, and admin roles. Traffic is routed to customer, driver, and admin APIs, which persist data in PostgreSQL and object storage and integrate with partners such as Stripe and email (SMTP).",
           ],
-          diagramPlaceholder: true,
+          diagram: {
+            src: "/images/joe-limo/architecture.png",
+            alt: "Joe Limo system architecture diagram showing clients, Keycloak identity, HTTPS edge, platform APIs, data stores, and partner integrations",
+            caption: "Platform architecture — clients, identity, edge, services, data, and partners",
+            width: 2365,
+            height: 3138,
+          },
         },
         {
           heading: "Security",

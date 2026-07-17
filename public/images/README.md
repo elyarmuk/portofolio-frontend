@@ -16,4 +16,5 @@ Drop the approved photo here to replace the abstract hero visual:
 
 ## Other assets
 
-- Project architecture diagrams (e.g. `joe-limo-architecture.svg`).
+- Joe Limo case study media lives in `public/images/joe-limo/`
+  (architecture diagram + customer/chauffeur app screenshots).

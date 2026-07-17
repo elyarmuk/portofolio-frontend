@@ -11,6 +11,7 @@ import { Badge, StatusBadge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { ProjectJsonLd } from "@/components/seo/json-ld";
+import { ProjectDiagram, ProjectGallery } from "@/components/projects/project-media";
 
 type Params = { slug: string };
 
@@ -117,12 +118,16 @@ export default async function ProjectDetailPage({
                     ))}
                   </ul>
                 )}
-                {section.diagramPlaceholder && (
+                {section.diagram && <ProjectDiagram media={section.diagram} />}
+                {!section.diagram && section.diagramPlaceholder && (
                   <div className="mt-6 flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border-strong bg-surface-2/50 p-10 text-center">
                     <ImageIcon className="h-6 w-6 text-subtle" aria-hidden />
                     <p className="text-sm font-medium text-muted">Architecture diagram</p>
                     <p className="text-xs text-subtle">Detailed architecture diagram coming soon.</p>
                   </div>
+                )}
+                {section.gallery && section.gallery.length > 0 && (
+                  <ProjectGallery items={section.gallery} />
                 )}
               </Reveal>
             ))
