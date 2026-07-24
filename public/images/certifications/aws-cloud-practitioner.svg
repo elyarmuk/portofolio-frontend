@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" role="img" aria-labelledby="title">
+  <title id="title">AWS Certified Cloud Practitioner</title>
+  <defs>
+    <linearGradient id="bg" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#2A1A4A"/>
+      <stop offset="100%" stop-color="#120E1C"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#bg)" stroke="#2DE2C5" stroke-width="5"
+        d="M120 10 L218 66 L218 174 L120 230 L22 174 L22 66 Z"/>
+  <path fill="none" stroke="#FF9900" stroke-width="2.5" opacity="0.95"
+        d="M120 26 L202 72 L202 168 L120 214 L38 168 L38 72 Z"/>
+  <text x="120" y="72" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="2">AWS</text>
+  <text x="120" y="92" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">Certified</text>
+  <path fill="#FF9900" d="M70 118c24 18 56 27 90 22 4.5-.6 7.5 4.2 4.2 7.4-15 12-40 19.5-65 19.5-23 0-44-5.8-58-14.5-2.2-1.5-.5-5 2.2-4 12.5 3.8 27.5 6.8 43 6.8 19.5 0 38-4 53-10-26 2.2-53-4-75-19.5-2.3-1.7-.7-5.2 2.1-3.9z"/>
+  <text x="120" y="164" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Cloud Practitioner</text>
+  <text x="120" y="184" text-anchor="middle" fill="#2DE2C5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600">Foundational</text>
+</svg>

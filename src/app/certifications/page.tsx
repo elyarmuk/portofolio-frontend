@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Award, GraduationCap, Target } from "lucide-react";
+import Image from "next/image";
+import { Award, GraduationCap, Target, ExternalLink } from "lucide-react";
 
 import {
   completedCertifications,
@@ -15,7 +16,7 @@ import { PageHeader } from "@/components/sections/page-header";
 export const metadata: Metadata = createMetadata({
   title: "Certifications & Learning",
   description:
-    "Certifications and ongoing learning goals of Ahmed Moussa in cloud architecture, distributed systems, and AI-enabled software development.",
+    "AWS certifications and ongoing learning goals of Ahmed Moussa — Cloud Practitioner, Solutions Architect Associate, and Developer Associate.",
   path: "/certifications",
 });
 
@@ -24,8 +25,8 @@ export default function CertificationsPage() {
     <>
       <PageHeader
         eyebrow="Certifications & Learning"
-        title="Certifications & continuous learning"
-        description="Completed certifications are listed separately from active learning and future goals — nothing planned is presented as completed."
+        title="Cloud credentials & continuous learning"
+        description="Verified AWS certifications that validate cloud fluency, architecture, and developer skills — kept separate from active learning and future goals."
       />
 
       {/* Completed */}
@@ -33,26 +34,70 @@ export default function CertificationsPage() {
         <Reveal>
           <SectionHeading
             eyebrow="Completed"
-            title="Completed Certifications"
+            title="AWS Certifications"
+            description="Industry-recognized credentials from Amazon Web Services."
           />
         </Reveal>
         <div className="mt-8">
           {completedCertifications.length > 0 ? (
-            <div className="grid gap-4 sm:grid-cols-2">
-              {completedCertifications.map((cert, i) => (
-                <Reveal key={cert.name} delay={0.04 * i}>
-                  <Card className="flex h-full items-start gap-4">
-                    <span className="inline-flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-success/10 text-success">
-                      <Award className="h-5 w-5" aria-hidden />
-                    </span>
-                    <div>
-                      <h3 className="font-display font-bold text-foreground">{cert.name}</h3>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {completedCertifications.map((cert, i) => {
+                const body = (
+                  <Card
+                    interactive={Boolean(cert.credentialUrl)}
+                    className="flex h-full flex-col items-center p-6 text-center sm:items-start sm:text-left"
+                  >
+                    {cert.logoSrc ? (
+                      <div className="relative mx-auto h-36 w-32 sm:mx-0">
+                        <Image
+                          src={cert.logoSrc}
+                          alt={cert.logoAlt ?? `${cert.name} badge`}
+                          fill
+                          className="object-contain"
+                          sizes="128px"
+                        />
+                      </div>
+                    ) : (
+                      <span className="inline-flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-success/10 text-success">
+                        <Award className="h-5 w-5" aria-hidden />
+                      </span>
+                    )}
+                    <div className="mt-5 w-full">
+                      <h3 className="font-display text-lg font-bold text-foreground">
+                        {cert.name}
+                      </h3>
                       <p className="mt-1 text-sm text-muted">{cert.issuer}</p>
-                      <p className="mt-1 text-sm text-subtle">{cert.date}</p>
+                      {cert.date && (
+                        <p className="mt-1 text-sm text-subtle">{cert.date}</p>
+                      )}
+                      {cert.credentialUrl && (
+                        <p className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                          View credential
+                          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                        </p>
+                      )}
                     </div>
                   </Card>
-                </Reveal>
-              ))}
+                );
+
+                return (
+                  <Reveal key={cert.name} delay={0.04 * i}>
+                    {cert.credentialUrl ? (
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block h-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--ring)]"
+                        aria-label={`${cert.name} credential (opens in a new tab)`}
+                      >
+                        {body}
+                      </a>
+                    ) : (
+                      body
+                    )}
+                  </Reveal>
+                );
+              })}
             </div>
           ) : (
             <Reveal>

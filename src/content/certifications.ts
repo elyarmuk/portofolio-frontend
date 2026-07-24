@@ -3,25 +3,45 @@
  *
  * IMPORTANT:
  * - `completed` must contain ONLY verified, completed certifications.
- *   It is intentionally empty until verified items are provided.
  * - Do not present planned certifications as completed.
  */
 
 export type Certification = {
   name: string;
   issuer: string;
-  date: string; // display date
+  /** Display date when known; omit rather than inventing. */
+  date?: string;
   credentialUrl?: string;
+  /** Optional badge image under /public (e.g. "/images/certifications/..."). */
+  logoSrc?: string;
+  logoAlt?: string;
 };
 
 /**
- * Verified, completed certifications only. Intentionally empty — no unverified
- * certification is presented as completed. Add entries here once earned.
+ * Verified, completed certifications.
  */
-export const completedCertifications: Certification[] = [];
+export const completedCertifications: Certification[] = [
+  {
+    name: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    logoSrc: "/images/certifications/aws-cloud-practitioner.svg",
+    logoAlt: "AWS Certified Cloud Practitioner badge",
+  },
+  {
+    name: "AWS Certified Solutions Architect – Associate",
+    issuer: "Amazon Web Services",
+    logoSrc: "/images/certifications/aws-solutions-architect-associate.svg",
+    logoAlt: "AWS Certified Solutions Architect Associate badge",
+  },
+  {
+    name: "AWS Certified Developer – Associate",
+    issuer: "Amazon Web Services",
+    logoSrc: "/images/certifications/aws-developer-associate.svg",
+    logoAlt: "AWS Certified Developer Associate badge",
+  },
+];
 
 export const currentlyLearning: string[] = [
-  "AWS Solutions Architecture",
   "Cloud-native architecture",
   "Distributed systems",
   "AI-assisted software engineering",
@@ -29,7 +49,6 @@ export const currentlyLearning: string[] = [
 ];
 
 export const futureGoals: string[] = [
-  "AWS architecture certifications",
   "Advanced cloud architecture",
   "AI application architecture",
 ];
